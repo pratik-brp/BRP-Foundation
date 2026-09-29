@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, BookOpen, Laptop, Heart, Landmark, Leaf, Star
 import { Button } from "@/components/Button";
 import { SiteLayout } from "@/components/SiteChrome";
 import { WhoWeAre } from "@/components/WhoWeAre";
+import { ImpactGlance } from "@/components/ImpactGlance";
 import { CountUp, PhotoRotator } from "@/components/Motion";
 
 export const Route = createFileRoute("/")({
