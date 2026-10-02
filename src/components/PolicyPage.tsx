@@ -1,0 +1,2 @@
+import{PageHero,SiteLayout}from"./SiteChrome";import{policyContent}from"@/lib/edefy-data";
+export function PolicyPage({kind}:{kind:keyof typeof policyContent}){const data=policyContent[kind];return <SiteLayout><PageHero eyebrow={kind.replaceAll("-"," ")} title={data.title}/><article className="narrow policy-copy">{data.sections.map(([h,p])=><section key={h}><h2>{h}</h2><p>{p}</p></section>)}</article></SiteLayout>}

@@ -1,0 +1,12 @@
+import { Link } from "@tanstack/react-router";
+import { Button } from "./Button";
+import { Eyebrow } from "./SiteChrome";
+import { programs, events, articles, type Program, type EventItem } from "@/lib/edefy-data";
+
+export function SectionHeading({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) { return <div className="section-heading reveal"><Eyebrow>{eyebrow}</Eyebrow><h2>{title}</h2>{text && <p>{text}</p>}</div> }
+export function ProgramGrid({ limit }: { limit?: number }) { return <div className="card-grid stagger">{programs.slice(0, limit).map(p => <ProgramCard key={p.slug} program={p} />)}</div> }
+export function ProgramCard({ program }: { program: Program }) { return <article className="image-card"><img src={program.image} alt={program.title} loading="lazy" /><div className="card-overlay"><div className="meta">{program.age}</div><h3>{program.title}</h3><p>{program.description}</p><Link to="/program/$slug" params={{ slug: program.slug }} className="site-button site-button--outline">Learn More<span aria-hidden="true">✠</span></Link></div></article> }
+export function EventGrid({ limit }: { limit?: number }) { return <div className="card-grid stagger">{events.slice(0, limit).map(e => <EventCard key={e.slug} event={e} />)}</div> }
+export function EventCard({ event }: { event: EventItem }) { return <article className="image-card"><img src={event.image} alt={event.title} loading="lazy" /><div className="card-overlay"><div className="meta">{event.date}</div><h3>{event.title}</h3><p>{event.description}</p><Link to="/event/$slug" params={{ slug: event.slug }} className="site-button site-button--outline">View Details<span aria-hidden="true">✠</span></Link></div></article> }
+export function ArticleGrid() { return <div className="card-grid stagger">{articles.map(a => <Link key={a.slug} to="/blog/$slug" params={{ slug: a.slug }} className="image-card article-card"><img src={a.image} alt={a.title} loading="lazy" /><div className="card-overlay"><div className="meta">▣ {a.date}　 ♧ EDUCATION</div><h3>{a.title}</h3></div></Link>)}</div> }
+export function InfoList({ items }: { items: readonly (readonly [string, string])[] }) { return <div className="info-list stagger">{items.map(([title, text], i) => <article key={title}><span>{String(i + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div> }
