@@ -9,6 +9,9 @@ export default defineConfig(({ command }) => ({
   server: {
     host: "::",
     port: 8080,
+    watch: {
+      ignored: ["**/.vercel/**", "**/.output/**", "**/.wrangler/**"],
+    },
   },
   resolve: {
     alias: { "@": `${process.cwd()}/src` },
@@ -46,6 +49,8 @@ export default defineConfig(({ command }) => ({
       server: { entry: "server" },
     }),
     viteReact(),
-    ...(command === "build" ? [nitro({ defaultPreset: "cloudflare-module" })] : []),
+    ...(command === "build"
+      ? [nitro({ defaultPreset: process.env.NITRO_PRESET || "vercel" })]
+      : []),
   ],
 }));
