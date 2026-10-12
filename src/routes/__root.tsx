@@ -15,19 +15,88 @@ import { BrandPreloader } from "@/components/BrandPreloader";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "24px",
+        background: "var(--background, #fbfbf9)",
+        color: "var(--foreground, #0c2340)",
+        fontFamily: "var(--font-body, sans-serif)",
+      }}
+    >
+      <div style={{ maxWidth: "480px", textAlign: "center" }}>
+        <img
+          src="/brp-logo.png"
+          alt="BRP Foundation Logo"
+          style={{ width: "72px", height: "72px", margin: "0 auto 24px", display: "block" }}
+        />
+        <p
+          style={{
+            fontSize: "12px",
+            letterSpacing: "0.14em",
+            fontWeight: 700,
+            color: "#206337",
+            textTransform: "uppercase",
+            marginBottom: "12px",
+          }}
+        >
+          404 Error
         </p>
-        <div className="mt-6">
+        <h1
+          style={{
+            fontSize: "64px",
+            fontWeight: 800,
+            lineHeight: 1,
+            color: "#0c2340",
+            margin: "0 0 16px",
+            fontFamily: "var(--font-display, sans-serif)",
+          }}
+        >
+          404
+        </h1>
+        <h2
+          style={{
+            fontSize: "22px",
+            fontWeight: 700,
+            color: "#0c2340",
+            margin: "0 0 12px",
+          }}
+        >
+          Page Not Found
+        </h2>
+        <p
+          style={{
+            fontSize: "15px",
+            lineHeight: 1.6,
+            color: "#52637a",
+            margin: "0 0 28px",
+          }}
+        >
+          The page you are looking for is currently unavailable or has been moved.
+        </p>
+        <div>
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              background: "#206337",
+              color: "#ffffff",
+              padding: "12px 28px",
+              borderRadius: "999px",
+              fontWeight: 600,
+              fontSize: "14px",
+              textDecoration: "none",
+              boxShadow: "0 4px 14px rgba(32, 99, 55, 0.25)",
+              cursor: "pointer",
+            }}
           >
-            Go home
+            ← Back to Home
           </Link>
         </div>
       </div>
@@ -119,13 +188,13 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
-export const DEMO_404_LOCK = true; // When true, all other routes show 404 Page Not Found
+export const DEMO_404_LOCK = false; // When true, all other routes show 404 Page Not Found
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const location = useLocation();
 
-  if (DEMO_404_LOCK && location.pathname !== "/") {
+  if (DEMO_404_LOCK && location.pathname !== "/" && location.pathname !== "/about") {
     return <NotFoundComponent />;
   }
 

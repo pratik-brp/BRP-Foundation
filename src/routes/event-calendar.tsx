@@ -1,2 +1,7 @@
-import{createFileRoute}from"@tanstack/react-router";import{SiteLayout,PageHero}from"@/components/SiteChrome";import{EventGrid,SectionHeading}from"@/components/PageBlocks";
-export const Route=createFileRoute("/event-calendar")({head:()=>({meta:[{title:"School Events & Academic Calendar — Edefy"},{name:"description",content:"Upcoming school events and important academic dates."},{property:"og:title",content:"School Events & Academic Calendar — Edefy"},{property:"og:description",content:"Upcoming school events and important academic dates."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}],links:[{rel:"canonical",href:"/event-calendar"}]}),component:Page});function Page(){return <SiteLayout><PageHero eyebrow="Events and academic calendar" title="School Events & Academic Calendar" description="Stay updated with our upcoming school events, celebrations, and important academic dates."/><section className="container"><EventGrid limit={3}/></section><section className="section container"><SectionHeading eyebrow="MONTHLY CALENDAR" title="Academic Calendar Overview"/><div className="calendar"><header><button aria-label="Previous month">←</button><h3>July 2020</h3><button aria-label="Next month">→</button></header><div>{["SUN","MON","TUE","WED","THU","FRI","SAT",...Array.from({length:35},(_,i)=>i<3||i>33?"":String(i-2))].map((d,i)=><span key={i}>{d}</span>)}</div></div></section></SiteLayout>}
+import { createFileRoute, redirect } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/event-calendar")({
+  beforeLoad: () => {
+    throw redirect({ to: "/gallery" });
+  },
+});

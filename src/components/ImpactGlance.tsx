@@ -28,7 +28,7 @@ export function ImpactGlance() {
   const sectionRef = useScrollProgress<HTMLElement>(1, 0);
 
   return (
-    <section ref={sectionRef} className="section narrow impact">
+    <section ref={sectionRef} id="impact" className="section narrow impact" style={{ scrollMarginTop: "100px" }}>
       <Eyebrow className="rise">Impact at a glance</Eyebrow>
       <BlurText text="Creating change across Nepal." />
       <p className="impact-intro rise">

@@ -73,7 +73,7 @@ export function WhoWeAre() {
   const stepClass = (i: number) => (i === active ? "story-step is-active" : "story-step");
 
   return (
-    <section ref={sectionRef} className="section container story">
+    <section ref={sectionRef} id="about" className="section container story" style={{ scrollMarginTop: "100px" }}>
       <div className="story-grid">
         <div className="story-pin">
           <div className="story-pin-inner rise">

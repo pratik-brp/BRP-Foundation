@@ -1,20 +1,42 @@
 import { Fragment, useEffect, useRef, useState, type CSSProperties } from "react";
 
+function splitGraphemes(text: string): string[] {
+  if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
+    const Segmenter = (
+      Intl as unknown as {
+        Segmenter: new (
+          locales?: string | string[],
+          options?: { granularity?: string },
+        ) => {
+          segment: (input: string) => Iterable<{ segment: string }>;
+        };
+      }
+    ).Segmenter;
+    const segmenter = new Segmenter(undefined, { granularity: "grapheme" });
+    return Array.from(segmenter.segment(text), (s) => s.segment);
+  }
+  return [...text];
+}
+
 // Heading that reveals character by character from a blur (Edefy's text effect).
-// Optional `accent` text is appended and styled via .blur-accent.
+// Optional `accent` text is appended and styled via .blur-accent; with `stacked` it
+// starts on a line of its own.
 // Screen readers get the plain text; the per-character spans are hidden from them.
 export function BlurText({
   text,
   accent,
   as: Tag = "h2",
   className = "",
+  stacked = false,
 }: {
   text: string;
   accent?: string;
   as?: "h1" | "h2" | "p";
   className?: string;
+  stacked?: boolean;
 }) {
   let i = 0;
+  const textWords = text.split(" ").length;
   const words = [
     ...text.split(" ").map((word) => [word, false] as const),
     ...(accent ? accent.split(" ").map((word) => [word, true] as const) : []),
@@ -25,9 +47,9 @@ export function BlurText({
       <span aria-hidden="true">
         {words.map(([word, isAccent], w) => (
           <Fragment key={w}>
-            {w > 0 && " "}
+            {w > 0 && (stacked && w === textWords ? <br /> : " ")}
             <span className={isAccent ? "blur-word blur-accent" : "blur-word"}>
-              {[...word].map((ch, c) => (
+              {splitGraphemes(word).map((ch, c) => (
                 <span key={c} style={{ "--i": i++ } as CSSProperties}>
                   {ch}
                 </span>

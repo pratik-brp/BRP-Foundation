@@ -50,7 +50,7 @@ export default defineConfig(({ command }) => ({
     }),
     viteReact(),
     ...(command === "build"
-      ? [nitro({ defaultPreset: process.env.NITRO_PRESET || "vercel" })]
+      ? [nitro({ defaultPreset: process.env["NITRO_PRESET"] || "vercel" })]
       : []),
   ],
 }));

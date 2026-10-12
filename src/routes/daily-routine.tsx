@@ -1,3 +1,7 @@
-import{createFileRoute}from"@tanstack/react-router";import{SiteLayout,PageHero}from"@/components/SiteChrome";
-const schedule=[["8:30 AM – Arrival & Free Play","Children arrive, settle in, and enjoy free play activities."],["9:00 AM – Morning Circle","Songs, stories, and group discussions to start the day."],["9:30 AM – Learning Activities","Age-appropriate lessons through fun and hands-on activities."],["10:30 AM – Snack Time","Healthy snacks and social time with friends."],["11:00 AM – Outdoor Play","Physical activities to build strength and coordination."],["12:00 PM – Creative Time","Art, music, and imaginative play sessions."],["1:00 PM – Lunch & Rest","Lunch followed by quiet rest or nap time."],["2:00 PM – Story & Reflection","Reading time and calm group activities."],["2:30 PM – Pick-up","Children prepare to go home feeling happy and accomplished."]];
-export const Route=createFileRoute("/daily-routine")({head:()=>({meta:[{title:"Day at Our Kindergarten — Edefy"},{name:"description",content:"Our balanced daily kindergarten schedule."},{property:"og:title",content:"Day at Our Kindergarten — Edefy"},{property:"og:description",content:"Our balanced daily kindergarten schedule."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}],links:[{rel:"canonical",href:"/daily-routine"}]}),component:Page});function Page(){return <SiteLayout><PageHero eyebrow="Our Daily Schedule" title="Day at Our Kindergarten" description="Our daily routine balances learning, play, rest, and creativity to support the healthy development of every child."/><section className="narrow timeline"><h2>MONDAY TO SATURDAY</h2>{schedule.map(([t,p])=><article key={t}><span></span><div><h3>{t}</h3><p>{p}</p></div></article>)}</section></SiteLayout>}
+import { createFileRoute, redirect } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/daily-routine")({
+  beforeLoad: () => {
+    throw redirect({ to: "/program" });
+  },
+});

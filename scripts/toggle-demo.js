@@ -32,8 +32,8 @@ if (startIndex !== -1 && endIndex !== -1) {
 
   if (action === 'unhide') {
     // Show footer and lower sections
-    indexCode = indexCode.replace(/<SiteLayout[^>]*>/, '<SiteLayout>');
     indexCode = beforeStart + cleanBetween + afterEnd;
+    indexCode = indexCode.replace(/<SiteLayout[^>]*>/, '<SiteLayout>');
 
     // Disable 404 lock for other routes
     rootCode = rootCode.replace(/export const DEMO_404_LOCK = (true|false);/, 'export const DEMO_404_LOCK = false;');
